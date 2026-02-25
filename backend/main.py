@@ -155,6 +155,24 @@ def lock_session(
     return session_dict(s)
 
 
+@app.post("/sessions/{session_id}/unlock")
+def unlock_session(
+    session_id: str,
+    db: DBSession = Depends(get_db),
+    _=Depends(verify_admin),
+):
+    s = db.query(SessionModel).filter(SessionModel.id == session_id).first()
+    if not s:
+        raise HTTPException(404)
+    s.status = "open"
+    s.per_head_cost = None
+    for r in s.rsvps:
+        r.amount_due = None
+    db.commit()
+    db.refresh(s)
+    return session_dict(s)
+
+
 @app.post("/sessions/{session_id}/rsvp")
 def add_rsvp(session_id: str, req: RSVPReq, db: DBSession = Depends(get_db)):
     s = db.query(SessionModel).filter(SessionModel.id == session_id).first()

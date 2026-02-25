@@ -23,22 +23,27 @@ export default function Session() {
     return () => document.body.removeChild(script)
   }, [])
 
-  // Fetch current session
+  // Fetch current session + poll every 10s
   useEffect(() => {
-    fetch(`${API}/sessions/current`)
-      .then(r => r.json())
-      .then(d => {
-        setSession(d.session)
-        if (d.session) restoreMyRsvp(d.session)
-      })
-      .finally(() => setLoading(false))
+    function load() {
+      fetch(`${API}/sessions/current`)
+        .then(r => r.json())
+        .then(d => {
+          setSession(d.session)
+          if (d.session) restoreMyRsvp(d.session)
+        })
+        .finally(() => setLoading(false))
+    }
+    load()
+    const interval = setInterval(load, 10000)
+    return () => clearInterval(interval)
   }, [])
 
   function restoreMyRsvp(s) {
     const savedName = localStorage.getItem("ts_name")
     if (!savedName) return
     const found = s.rsvps.find(r => r.player_name === savedName)
-    if (found) setMyRsvp(found)
+    if (found) setMyRsvp(found)  // keeps payment_status in sync on each poll
   }
 
   async function handleRsvp(status) {

@@ -78,6 +78,13 @@ export default function Admin() {
     loadSession()
   }
 
+  async function unlockSession() {
+    if (!confirm("Unlock session? Per-head cost will be cleared and players can RSVP again.")) return
+    const res = await fetch(`${API}/sessions/${session.id}/unlock`, { method: "POST", headers })
+    const data = await res.json()
+    setSession(data)
+  }
+
   async function closeSession() {
     if (!confirm("Mark session as closed?")) return
     await fetch(`${API}/sessions/${session.id}/close`, { method: "POST", headers })
@@ -185,7 +192,10 @@ export default function Admin() {
               </button>
             )}
             {session.status === "locked" && (
-              <button className="close-btn" onClick={closeSession}>✅ Close Session</button>
+              <>
+                <button className="ghost-btn" onClick={unlockSession}>🔓 Unlock</button>
+                <button className="close-btn" onClick={closeSession}>✅ Close Session</button>
+              </>
             )}
           </div>
 
