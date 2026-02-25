@@ -1,0 +1,305 @@
+/* ===== Layout ===== */
+.app-root { min-height: 100vh; }
+.page { max-width: 480px; margin: 0 auto; padding: 16px; padding-bottom: 40px; }
+
+/* ===== Nav ===== */
+.top-nav {
+  background: #16a34a;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.nav-brand { font-weight: 700; font-size: 1.1rem; }
+.nav-link {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 0.85rem;
+  padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 6px;
+}
+.admin-link { opacity: 0.7; }
+
+/* ===== Cards ===== */
+.session-card, .rsvp-card, .pay-card, .players-card, .reminder-card {
+  background: white;
+  border-radius: 14px;
+  padding: 18px;
+  margin-top: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+.card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.player-count {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #6b7280;
+}
+
+/* ===== Session header ===== */
+.session-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: #dcfce7;
+  color: #16a34a;
+  margin-bottom: 8px;
+}
+.session-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+.session-meta { color: #6b7280; font-size: 0.9rem; margin-bottom: 16px; }
+
+.session-cost-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 14px;
+}
+.cost-block { text-align: center; flex: 1; }
+.cost-label { font-size: 0.7rem; color: #9ca3af; margin-bottom: 2px; }
+.cost-value { font-size: 1rem; font-weight: 700; }
+.cost-value.green { color: #16a34a; font-size: 1.15rem; }
+.cost-divider { color: #d1d5db; font-size: 1.2rem; }
+
+.collection-bar-wrap { margin-top: 4px; }
+.collection-bar-label { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
+.collection-bar-bg { height: 6px; background: #e5e7eb; border-radius: 99px; overflow: hidden; }
+.collection-bar-fill { height: 100%; background: #16a34a; border-radius: 99px; transition: width 0.4s; }
+
+/* ===== Inputs ===== */
+.ts-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  outline: none;
+  transition: border 0.15s;
+}
+.ts-input:focus { border-color: #16a34a; }
+.ts-label { font-size: 0.8rem; color: #6b7280; margin-bottom: 4px; display: block; }
+
+/* ===== RSVP buttons ===== */
+.rsvp-btn-row { display: flex; gap: 8px; margin-bottom: 12px; }
+.rsvp-btn {
+  flex: 1;
+  padding: 10px 4px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  background: white;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.rsvp-btn.in.active  { background: #dcfce7; border-color: #16a34a; color: #15803d; }
+.rsvp-btn.maybe.active { background: #fef9c3; border-color: #ca8a04; color: #92400e; }
+.rsvp-btn.out.active { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+.rsvp-confirm { font-size: 0.85rem; color: #16a34a; }
+
+/* ===== Pay ===== */
+.pay-amount { font-size: 1.1rem; margin-bottom: 12px; }
+.pay-btn {
+  width: 100%;
+  padding: 13px;
+  background: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.pay-btn:hover { background: #15803d; }
+.pay-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.pay-note { font-size: 0.78rem; color: #9ca3af; text-align: center; margin-top: 8px; }
+.paid-badge {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #16a34a;
+  padding: 12px;
+  background: #dcfce7;
+  border-radius: 10px;
+}
+
+/* ===== Player list ===== */
+.player-list { display: flex; flex-direction: column; gap: 8px; }
+.player-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+.maybe-row { opacity: 0.65; }
+.player-name { font-weight: 500; font-size: 0.9rem; }
+.player-pay-badge { font-size: 0.78rem; }
+.player-pay-badge.paid_online { color: #16a34a; }
+.player-pay-badge.paid_cash { color: #ca8a04; }
+.empty-msg { color: #9ca3af; font-size: 0.85rem; text-align: center; padding: 12px; }
+
+/* ===== Admin ===== */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+.admin-login { background: white; border-radius: 14px; padding: 24px; margin-top: 16px; }
+.admin-login h2 { margin-bottom: 16px; }
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 16px;
+}
+.stat-box {
+  background: white;
+  border-radius: 10px;
+  padding: 10px 6px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.stat-box.green .stat-num { color: #16a34a; }
+.stat-num { font-size: 1.1rem; font-weight: 700; }
+.stat-label { font-size: 0.68rem; color: #9ca3af; margin-top: 2px; }
+
+.share-row { display: flex; gap: 6px; margin-top: 12px; align-items: center; }
+.share-input { flex: 1; font-size: 0.78rem; margin-bottom: 0; }
+.copy-btn {
+  padding: 10px 12px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  background: white;
+  font-size: 0.8rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.whatsapp-share-btn {
+  padding: 10px 12px;
+  background: #25d366;
+  color: white;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.action-row { margin-top: 12px; }
+.lock-btn {
+  width: 100%;
+  padding: 12px;
+  background: #f59e0b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.lock-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.close-btn {
+  width: 100%;
+  padding: 12px;
+  background: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-player-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #f3f4f6;
+}
+.admin-player-left { display: flex; flex-direction: column; gap: 2px; }
+.player-phone { font-size: 0.75rem; color: #9ca3af; }
+.admin-player-actions { display: flex; gap: 6px; align-items: center; }
+
+.cash-btn, .remind-btn {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+}
+.cash-btn { background: #fef9c3; color: #92400e; }
+.remind-btn { background: #dcfce7; color: #15803d; }
+.remove-btn {
+  padding: 4px 8px;
+  background: none;
+  border: 1px solid #fee2e2;
+  border-radius: 6px;
+  color: #dc2626;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+.pay-tag { font-size: 0.78rem; font-weight: 600; }
+.pay-tag.paid_online { color: #16a34a; }
+.pay-tag.paid_cash { color: #ca8a04; }
+.no-phone { font-size: 0.75rem; color: #d1d5db; }
+.section-divider {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  padding: 8px 0 4px;
+  border-top: 1px solid #f3f4f6;
+  margin-top: 4px;
+}
+
+.reminder-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 0.9rem;
+}
+
+.ghost-btn {
+  background: none;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: #6b7280;
+}
+.ghost-btn.danger { color: #dc2626; border-color: #fee2e2; margin-top: 16px; width: 100%; }
+
+/* ===== Misc ===== */
+.center-msg { text-align: center; padding: 60px 20px; color: #6b7280; }
+.no-session-icon { font-size: 3rem; margin-bottom: 12px; }
+.footer-note { text-align: center; font-size: 0.75rem; color: #9ca3af; margin-top: 24px; }
+
+@media (max-width: 380px) {
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .rsvp-btn { font-size: 0.75rem; }
+}
