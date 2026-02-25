@@ -1,5 +1,5 @@
 import httpx
-from .settings import settings
+from settings import settings
 
 BASE = (
     "https://api.cashfree.com/pg"

@@ -6,10 +6,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sqlalchemy.orm import Session as DBSession
 
-from .database import engine, get_db
-from .models import Base, Session as SessionModel, RSVP
-from .settings import settings
-from . import payment
+from database import engine, get_db
+from models import Base, Session as SessionModel, RSVP
+from settings import settings
+import payment
 
 Base.metadata.create_all(bind=engine)
 
