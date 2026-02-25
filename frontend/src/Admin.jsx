@@ -41,14 +41,22 @@ export default function Admin() {
   }, [authed])
 
   async function createSession() {
-    const res = await fetch(`${API}/sessions`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({ date, time, turf_name: turfName, turf_cost: Number(turfCost) }),
-    })
-    if (res.status === 403) return alert("Wrong password")
-    const data = await res.json()
-    setSession(data)
+    setLoading(true)
+    try {
+      const res = await fetch(`${API}/sessions`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify({ date, time, turf_name: turfName, turf_cost: Number(turfCost) }),
+      })
+      if (res.status === 403) { alert("Wrong password"); return }
+      if (!res.ok) { alert(`Server error: ${res.status}`); return }
+      const data = await res.json()
+      setSession(data)
+    } catch (e) {
+      alert(`Could not reach server: ${e.message}\n\nAPI: ${API}`)
+    } finally {
+      setLoading(false)
+    }
   }
 
   async function lockSession() {
@@ -125,7 +133,9 @@ export default function Admin() {
           <input className="ts-input" value={turfName} onChange={e => setTurfName(e.target.value)} />
           <label className="ts-label">Turf cost (₹)</label>
           <input className="ts-input" type="number" value={turfCost} onChange={e => setTurfCost(e.target.value)} />
-          <button className="pay-btn" onClick={createSession}>🏏 Create Session</button>
+          <button className="pay-btn" onClick={createSession} disabled={loading}>
+            {loading ? "Creating..." : "🏏 Create Session"}
+          </button>
         </div>
       )}
 
